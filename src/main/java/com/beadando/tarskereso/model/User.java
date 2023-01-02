@@ -5,11 +5,20 @@ import java.util.ArrayList;
 public class User {
 
     private Integer id;
-    //private Enum nem;
+    private Nem_enum nem;
     private String nev;
     private Integer kor;
     private String leiras;
-    private ArrayList<Integer> likeok;
+
+    public Nem_enum getNem() {
+        return nem;
+    }
+
+    public void setNem(Nem_enum nem) {
+        this.nem = nem;
+    }
+
+    public ArrayList<Integer> likeok;
 
     public Integer getId() {
         return id;
@@ -50,4 +59,5 @@ public class User {
         this.leiras = leiras;
         this.likeok = likeok;
     }
+    public User(){}
 }
