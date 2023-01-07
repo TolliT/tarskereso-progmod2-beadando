@@ -5,8 +5,6 @@ import com.beadando.tarskereso.model.Nem_enum;
 import com.beadando.tarskereso.model.User;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import org.jetbrains.annotations.NotNull;
-import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileReader;

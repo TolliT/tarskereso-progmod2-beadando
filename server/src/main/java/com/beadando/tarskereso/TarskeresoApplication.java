@@ -1,7 +1,6 @@
 package com.beadando.tarskereso;
 
 
-import com.beadando.tarskereso.model.Nem_enum;
 import com.beadando.tarskereso.model.User;
 import com.beadando.tarskereso.services.Tarskereso_services;
 import org.springframework.boot.SpringApplication;
@@ -13,9 +12,9 @@ import java.util.List;
 @SpringBootApplication
 public class TarskeresoApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TarskeresoApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TarskeresoApplication.class, args);
+    }
 
 	{
 		ArrayList<Integer> likee = new ArrayList<>();
