@@ -15,8 +15,8 @@ public class TarskeresoApplication {
     public static void main(String[] args) {
         SpringApplication.run(TarskeresoApplication.class, args);
     }
-
-	{
+	//TODO: ezeket rakjatok egy kulon main classba, ne ide pakoljatok
+	/*
 		ArrayList<Integer> likee = new ArrayList<>();
 		likee.add(1);
 		likee.add(2);
@@ -28,7 +28,7 @@ public class TarskeresoApplication {
 		//alma.toFile("src/main/resources/Tarskereso_db.csv", valaki);
 		List<User> users = new ArrayList<>();
 
-		users = alma.fromFile("src/main/resources/Tarskereso_db.csv");
+		users = alma.fromFile("server/src/main/resources/Tarskereso_db.csv");
 		for(int i = 0; i<users.size(); i++){
 			System.out.println(users.get(i).getId());
 			System.out.println(users.get(i).getNem());
@@ -37,6 +37,5 @@ public class TarskeresoApplication {
 			System.out.println(users.get(i).getLeiras());
 			System.out.println(users.get(i).likeok);
 		}
-
-	}
+		*/
 }
