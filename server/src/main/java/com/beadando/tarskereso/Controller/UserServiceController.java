@@ -20,14 +20,13 @@ public class UserServiceController {
     @CrossOrigin
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public ResponseEntity<Object> getUser(){
-        ArrayList<Integer> likeok= new ArrayList<>();
-        likeok.add(42);
 
-
-        User testuser = new User(1, "Márk King", 20, "vices memik", likeok);
+        User testuser = new User(1, "Márk King", 20, "vices memik", Boolean.TRUE);
         testuser.setNem(Nem_enum.ferfi);
         return new ResponseEntity<>(testuser, HttpStatus.OK);
     }
+
+
 }
 
 

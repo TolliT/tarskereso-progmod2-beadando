@@ -28,13 +28,8 @@ public class Tarskereso_services implements Tarskereso_interface{
             data[2] = user.getNev();
             data[3] = user.getKor().toString();
             data[4] = user.getLeiras();
-            String like = new String();
-            like = "";
+            data[5]=user.getKedvel().toString();
 
-            for (int i = 0; i < user.likeok.size(); i++) {
-                like += user.likeok.get(i).toString() + ",";
-            }
-            data[5] = like.substring(0,like.length()-1);
             writer.writeNext(data);
             writer.close();
         }
@@ -42,7 +37,7 @@ public class Tarskereso_services implements Tarskereso_interface{
             e.printStackTrace();
         }
 
-    };
+    }
     public List<User> fromFile(String path){
         List<User> felhasznalok = new ArrayList<>();
         try {
@@ -64,13 +59,12 @@ public class Tarskereso_services implements Tarskereso_interface{
                 felhasznalo.setNev(nextRecord[2]);
                 felhasznalo.setKor(Integer.parseInt(nextRecord[3]));
                 felhasznalo.setLeiras(nextRecord[4]);
-                List<String> temp_list = Arrays.asList(nextRecord[5].split(","));
-                ArrayList<Integer> l = new ArrayList<>();
-
-                for(int i = 0; i < temp_list.size(); i++){
-                    l.add(Integer.parseInt(temp_list.get(i)));
+                if(nextRecord[5].equals("true")){
+                    felhasznalo.setKedvel(Boolean.TRUE);
                 }
-               felhasznalo.likeok = l;
+                else{
+                    felhasznalo.setKedvel(Boolean.FALSE);
+                }
                 felhasznalok.add(felhasznalo);
 
             }

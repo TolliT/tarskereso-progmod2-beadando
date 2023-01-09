@@ -10,6 +10,16 @@ public class User {
     private Integer kor;
     private String leiras;
 
+    private Boolean kedvel;
+
+    public Boolean getKedvel() {
+        return kedvel;
+    }
+
+    public void setKedvel(Boolean kedvel) {
+        this.kedvel = kedvel;
+    }
+
     public Nem_enum getNem() {
         return nem;
     }
@@ -18,7 +28,7 @@ public class User {
         this.nem = nem;
     }
 
-    public ArrayList<Integer> likeok;
+
 
     public Integer getId() {
         return id;
@@ -52,12 +62,12 @@ public class User {
         this.leiras = leiras;
     }
 
-    public User(Integer id, String nev, Integer kor, String leiras, ArrayList<Integer> likeok) {
+    public User(Integer id, String nev, Integer kor, String leiras, Boolean kedvel) {
         this.id = id;
         this.nev = nev;
         this.kor = kor;
         this.leiras = leiras;
-        this.likeok = likeok;
+        this.kedvel=kedvel;
     }
     public User(){}
 }
