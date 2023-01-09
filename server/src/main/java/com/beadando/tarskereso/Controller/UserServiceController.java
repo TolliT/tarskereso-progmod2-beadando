@@ -15,6 +15,8 @@ import java.util.Map;
 @RestController
 public class UserServiceController {
 
+    public static ArrayList<User> Filtered = new ArrayList<>();
+
     @CrossOrigin
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public ResponseEntity<Object> getUser(){
@@ -25,12 +27,17 @@ public class UserServiceController {
     }
 
 
+
     @CrossOrigin
     @PostMapping("/prefs")
     public ResponseEntity<String> submit(@RequestBody Map<String, Object> payload) {
         for (Map.Entry<String, Object> entry : payload.entrySet()) {
             System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+
         }
+
+
+
         return ResponseEntity.ok("success");
     }
 }

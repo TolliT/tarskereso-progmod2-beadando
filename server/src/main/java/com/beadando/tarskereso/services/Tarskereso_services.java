@@ -10,12 +10,15 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
 public class Tarskereso_services implements Tarskereso_interface{
+
+
 
     public void toFile(String path, User user){
         File file = new File(path);
@@ -75,5 +78,21 @@ public class Tarskereso_services implements Tarskereso_interface{
             e.printStackTrace();
         }
         return felhasznalok;
+    }
+
+    public ArrayList<User> userFilter(String genderPref, Integer minAge, Integer maxAge){
+        List<User> users = fromFile("server/src/main/resources/Tarskereso_db.csv");
+        ArrayList<User> filtered = new ArrayList<>();
+
+        for(int i=0; i<users.size(); i++){
+            User user=users.get(i);
+            if(user.getNem().toString().equals(genderPref)  && user.getKor()>=minAge && user.getKor()<=maxAge){
+                filtered.add(user);
+            }
+        }
+
+
+
+        return filtered;
     }
 }
