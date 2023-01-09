@@ -3,7 +3,7 @@
 
 <head>
 
-	<title>Card Swipe System</title>
+	<title>Tarskereso Beadando Project</title>
   	<link rel="stylesheet" href="stylesheet.css">
 
 </head>
@@ -23,6 +23,34 @@
 			</div>
 		</div>
 	</div>
+
+	<div class="card-container">
+		<div class="settings">
+			<form name="prefs">
+				<form>
+					<label>
+					  <input type="radio" name="gender" value="male">
+					  Male
+					</label>
+					<br>
+					<label>
+					  <input type="radio" name="gender" value="female">
+					  Female
+					</label>
+					<br>
+				  </form>
+				  
+
+				<label for="ageMin">Min Age:</label>
+				<input type="number" id="ageMin" name="ageMin" min="18" max="99" value="18">
+				<label for="ageMax">Max Age:</label>
+				<input type="number" id="ageMax" name="ageMax" min="18" max="99" value="99">
+
+				<button name="submitButton">Submit</button>
+			</form>
+		</div>
+	</div>
+
 
 	<script src="swipeHandler.js"></script>
 

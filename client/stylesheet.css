@@ -24,6 +24,18 @@ body {
   border-radius: 5px;
   overflow: hidden;
   position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.settings {
+  width: 300px;
+  height: 150px;
+  border: 1px solid #151515;
+  background-color: #E9B872;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .card img {

@@ -1,11 +1,30 @@
-const APIUrl = "127.0.0.1:8080";
+const GETUrl = "http://localhost:8080/getuser";
+const POSTUrl = "http://localhost:8080/prefs";
 
 const cards = document.querySelectorAll('.card');
 const likeButton = document.querySelector('.like');
 const dislikeButton = document.querySelector('.dislike');
 
+const settings = document.querySelector('.settings');
+const ageMin = settings.querySelector('[name=ageMin]');
+const ageMax = settings.querySelector('[name=ageMax]');
+const submitButton = settings.querySelector('[name=submitButton]');
+
+const form = document.querySelector('form');
+
 const infoLine = document.querySelector('.infoLine');
 const bioLine = document.querySelector('.bioLine');
+
+submitButton.addEventListener('click', () => {
+
+    const POSTData = {
+      genderPref: form.elements.gender.value,
+      minAge: ageMin.value,
+      maxAge: ageMax.value
+    }
+
+    postData(POSTUrl, POSTData);
+  });
 
 likeButton.addEventListener('click', () => {
   console.log("Like");
@@ -18,9 +37,10 @@ dislikeButton.addEventListener('click', () => {
 });
 
 function newCard() {
-  getData(APIUrl)
+  getData(GETUrl)
   .then(response => {
-    console.log("got data");
+    infoLine.textContent = response.nev + " (" + response.kor + ")";
+    bioLine.textContent = response.leiras;
     // response.name
   })
   .catch(error => {
@@ -45,4 +65,27 @@ function getData(url) {
     xhr.onerror = () => reject(xhr.statusText);
     xhr.send();
   });
+}
+
+function postData(url, data) {
+  const xhr = new XMLHttpRequest();
+
+  xhr.open('POST', url);
+  xhr.setRequestHeader('Content-Type', 'application/json');
+
+  xhr.onload = function() {
+    if (xhr.status >= 200 && xhr.status < 300) {
+      // Success
+      console.log(xhr.response);
+    } else {
+      // Request failed
+      console.error(xhr.statusText);
+    }
+  };
+
+  xhr.onerror = function() {
+    console.error(xhr.statusText);
+  };
+
+  xhr.send(JSON.stringify(data));
 }
