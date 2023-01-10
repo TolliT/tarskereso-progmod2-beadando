@@ -6,7 +6,6 @@ import com.beadando.tarskereso.model.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -22,7 +21,7 @@ public class UserServiceController {
     public ResponseEntity<Object> getUser(){
 
         User testuser = new User(1, "Márk King", 20, "vices memik", Boolean.TRUE);
-        testuser.setNem(Nem_enum.ferfi);
+        testuser.setNem(Nem_enum.no);
         return new ResponseEntity<>(testuser, HttpStatus.OK);
     }
 

@@ -5,9 +5,6 @@ const POSTUrl = "http://localhost:8080/prefs";
 const male_ph = "placeholder.png";
 const female_ph = "placeholder_female.png";
 
-const blurMatch = 10;
-const blurDef = 0;
-
 //  CARDS
 const cards = document.querySelector('.card');
 const main = document.querySelector('.main');
@@ -78,7 +75,7 @@ submitButton.addEventListener('click', () => {
 
 
 likeButton.addEventListener('click', () => {
-  if(currLike == true){ match(); }
+  if(currLike === true){ match(); }
   newCard();
 });
 
@@ -112,7 +109,7 @@ function newCard() {
     currLike = JSON.parse(response.kedvel);
     currName = response.nev;
 
-    if(response.nem == "ferfi"){
+    if(response.nem === "ferfi"){
       image.src = male_ph
     }
     else{
@@ -120,7 +117,7 @@ function newCard() {
     }
   })
   .catch(error => {
-    console.log("ERROR: API call failed!");
+    console.error("Error:", error);
   });
 }
 
