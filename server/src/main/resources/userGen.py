@@ -19,7 +19,7 @@ while( num < 1 or num > 1000):
 for i in range(num):
     g = "male"
     g_hu = "ferfi"
-    like = False
+    like = "false"
     
     v_rand = verbs[random.randrange(0, len(verbs))]
     n_rand = nouns[random.randrange(0, len(nouns))]
@@ -35,7 +35,7 @@ for i in range(num):
         g_hu = "no"
         
     if like_rand is 0:
-        like = True
+        like = "true"
     
     name = names.get_full_name(gender=g)
     age = random.randrange(18,100)

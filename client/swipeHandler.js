@@ -71,6 +71,7 @@ submitButton.addEventListener('click', () => {
     }
 
     postData(POSTUrl, POSTData);
+    setTimeout(newCard, 500);
   });
 
 

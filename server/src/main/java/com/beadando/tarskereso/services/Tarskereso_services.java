@@ -58,7 +58,7 @@ public class Tarskereso_services implements Tarskereso_interface{
                 felhasznalo.setNev(nextRecord[2]);
                 felhasznalo.setKor(Integer.parseInt(nextRecord[3]));
                 felhasznalo.setLeiras(nextRecord[4]);
-                if(nextRecord[5].equals("True")){
+                if(nextRecord[5].equals("true")){
                     felhasznalo.setKedvel(Boolean.TRUE);
                 }
                 else{
@@ -94,7 +94,7 @@ public class Tarskereso_services implements Tarskereso_interface{
     public void flushDB(String path){
         File file = new File(path);
         try {
-            FileWriter outputfile = new FileWriter(file, true);
+            FileWriter outputfile = new FileWriter(file, false);
             CSVWriter writer = new CSVWriter(outputfile);
             writer.flush();
         }
