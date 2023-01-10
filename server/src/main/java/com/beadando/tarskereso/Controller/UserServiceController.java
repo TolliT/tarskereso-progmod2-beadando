@@ -3,6 +3,7 @@ package com.beadando.tarskereso.Controller;
 
 import com.beadando.tarskereso.model.User;
 import com.beadando.tarskereso.services.Tarskereso_services;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +14,23 @@ import java.util.Map;
 @RestController
 public class UserServiceController {
  Tarskereso_services service = new Tarskereso_services();
+    String path="server/src/main/resources/filtered.csv";
+
     public static ArrayList<User> Filtered = new ArrayList<>();
 
     @CrossOrigin
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public ResponseEntity<Object> getUser(){
+        ArrayList<User> filtered=service.fromFile(path);
+        User user=filtered.get(0);
+        filtered.remove(0);
+        service.flushDB(path);
+        for (User value : filtered) {
+            service.toFile(path, value);
+        }
 
-        //User testuser = new User(1, "Márk King", 20, "vices memik", Boolean.TRUE);
-        //estuser.setNem(Nem_enum.no);
-        //return new ResponseEntity<>(testuser, HttpStatus.OK);
-        return null;
+        return new ResponseEntity<>(user, HttpStatus.OK);
+
     }
 
 
@@ -48,7 +56,7 @@ public class UserServiceController {
 
         }
 
-        String path="server/src/main/resources/filtered.csv";
+
 
         service.flushDB(path);
 
