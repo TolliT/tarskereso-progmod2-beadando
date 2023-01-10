@@ -10,9 +10,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -80,13 +78,12 @@ public class Tarskereso_services implements Tarskereso_interface{
         return felhasznalok;
     }
 
-    public ArrayList<User> userFilter(String genderPref, Integer minAge, Integer maxAge){
+    public List<User> userFilter(String genderPref, Integer minAge, Integer maxAge){
         List<User> users = fromFile("server/src/main/resources/Tarskereso_db.csv");
-        ArrayList<User> filtered = new ArrayList<>();
+        List<User> filtered = new ArrayList<>();
 
-        for(int i=0; i<users.size(); i++){
-            User user=users.get(i);
-            if(user.getNem().toString().equals(genderPref)  && user.getKor()>=minAge && user.getKor()<=maxAge){
+        for (User user : users) {
+            if (user.getNem().toString().equals(genderPref) && user.getKor() >= minAge && user.getKor() <= maxAge) {
                 filtered.add(user);
             }
         }
@@ -95,4 +92,19 @@ public class Tarskereso_services implements Tarskereso_interface{
 
         return filtered;
     }
+
+
+    public void flushDB(String path){
+        File file = new File(path);
+        try {
+            FileWriter outputfile = new FileWriter(file, true);
+            CSVWriter writer = new CSVWriter(outputfile);
+            writer.flush();
+        }
+
+        catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -1,6 +1,6 @@
 package com.beadando.tarskereso.model;
 
-import java.util.ArrayList;
+
 
 public class User {
 
