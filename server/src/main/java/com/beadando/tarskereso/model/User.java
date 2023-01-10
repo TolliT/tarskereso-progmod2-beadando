@@ -29,7 +29,6 @@ public class User {
     }
 
 
-
     public Integer getId() {
         return id;
     }
@@ -62,12 +61,5 @@ public class User {
         this.leiras = leiras;
     }
 
-    public User(Integer id, String nev, Integer kor, String leiras, Boolean kedvel) {
-        this.id = id;
-        this.nev = nev;
-        this.kor = kor;
-        this.leiras = leiras;
-        this.kedvel=kedvel;
-    }
     public User(){}
 }

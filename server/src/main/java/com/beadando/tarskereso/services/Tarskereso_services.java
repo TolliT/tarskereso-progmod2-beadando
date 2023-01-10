@@ -11,7 +11,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class Tarskereso_services implements Tarskereso_interface{
@@ -29,7 +28,7 @@ public class Tarskereso_services implements Tarskereso_interface{
             data[2] = user.getNev();
             data[3] = user.getKor().toString();
             data[4] = user.getLeiras();
-            data[5]=user.getKedvel().toString();
+            data[5] = user.getKedvel().toString();
 
             writer.writeNext(data);
             writer.close();
@@ -39,8 +38,8 @@ public class Tarskereso_services implements Tarskereso_interface{
         }
 
     }
-    public List<User> fromFile(String path){
-        List<User> felhasznalok = new ArrayList<>();
+    public ArrayList<User> fromFile(String path){
+        ArrayList<User> felhasznalok = new ArrayList<>();
         try {
             FileReader filereader = new FileReader(path);
             CSVReader csvReader = new CSVReader(filereader);
@@ -48,7 +47,6 @@ public class Tarskereso_services implements Tarskereso_interface{
             while((nextRecord = csvReader.readNext()) != null){
                 User felhasznalo = new User();
                 felhasznalo.setId(Integer.parseInt(nextRecord[0]));
-                int j = 1;
                 switch(nextRecord[1]){
                     case("ferfi"):
                         felhasznalo.setNem(Nem_enum.ferfi);
@@ -60,16 +58,15 @@ public class Tarskereso_services implements Tarskereso_interface{
                 felhasznalo.setNev(nextRecord[2]);
                 felhasznalo.setKor(Integer.parseInt(nextRecord[3]));
                 felhasznalo.setLeiras(nextRecord[4]);
-                if(nextRecord[5].equals("true")){
+                if(nextRecord[5].equals("True")){
                     felhasznalo.setKedvel(Boolean.TRUE);
                 }
                 else{
                     felhasznalo.setKedvel(Boolean.FALSE);
                 }
                 felhasznalok.add(felhasznalo);
-
             }
-
+            csvReader.close();
 
         }
         catch (Exception e) {
@@ -78,9 +75,9 @@ public class Tarskereso_services implements Tarskereso_interface{
         return felhasznalok;
     }
 
-    public List<User> userFilter(String genderPref, Integer minAge, Integer maxAge){
-        List<User> users = fromFile("server/src/main/resources/Tarskereso_db.csv");
-        List<User> filtered = new ArrayList<>();
+    public ArrayList<User> userFilter(String genderPref, Integer minAge, Integer maxAge){
+        ArrayList<User> users = fromFile("server/src/main/resources/Tarskereso_db.csv");
+        ArrayList<User> filtered = new ArrayList<>();
 
         for (User user : users) {
             if (user.getNem().toString().equals(genderPref) && user.getKor() >= minAge && user.getKor() <= maxAge) {

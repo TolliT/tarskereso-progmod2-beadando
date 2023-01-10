@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface Tarskereso_interface {
     public void toFile(String path, User user);
-    public List<User> fromFile(String path);
+    public ArrayList<User> fromFile(String path);
 
-    public List<User> userFilter(String gender, Integer minAge, Integer maxAge);
+    public ArrayList<User> userFilter(String gender, Integer minAge, Integer maxAge);
 
     public void flushDB(String path);
 }
