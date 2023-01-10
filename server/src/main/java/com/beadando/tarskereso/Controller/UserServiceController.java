@@ -30,12 +30,6 @@ public class UserServiceController {
     @CrossOrigin
     @PostMapping("/prefs")
     public ResponseEntity<String> submit(@RequestBody Map<String, Object> payload) {
-        Tarskereso_services srv = new Tarskereso_services();
-        ArrayList<User> users = srv.fromFile("server/src/main/resources/Tarskereso_db.csv");
-        System.out.println(users.get(0).getNev());
-
-        /*
-        System.out.println(payload);
         String genderPref="";
         Integer minAge=0;
         Integer maxAge=0;
@@ -66,7 +60,7 @@ public class UserServiceController {
 
 
 
-        */
+
         return ResponseEntity.ok("success");
     }
 }
