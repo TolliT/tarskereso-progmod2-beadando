@@ -9,47 +9,51 @@
 </head>
 
 <body>
-
-	<div class="card-container">
-		<div class="card">
-			<img src="placeholder.png" alt="Profile Image">
-			<div class="info">
-				<h2 class="infoLine">Name (Age)</h2>
-				<p class="bioLine">Bio</p>
-			</div>
-			<div class="buttons">
-				<button class="like">Like</button>
-				<button class="dislike">Dislike</button>
+	<div class="main">
+		<div class="card-container">
+			<div class="card">
+				<img src="placeholder.png" alt="Profile Image">
+				<div class="info">
+					<h2 class="infoLine">Name (Age)</h2>
+					<p class="bioLine">Bio</p>
+				</div>
+				<div class="buttons">
+					<button class="like">Like</button>
+					<button class="dislike">Dislike</button>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="card-container">
-		<div class="settings">
-			<form name="prefs">
-				<form>
-					<div class="radio-button-container">
-					  <input type="radio" name="gender" value="ferfi" id="male" checked>
-					  <label for="male">Male</label>
-					  <input type="radio" name="gender" value="no" id="female">
-					  <label for="female">Female</label>
+		<div class="card-container">
+			<div class="settings">
+				<form name="prefs">
+					<form>
+						<div class="radio-button-container">
+						<input type="radio" name="gender" value="ferfi" id="male" checked>
+						<label for="male">Male</label>
+						<input type="radio" name="gender" value="no" id="female">
+						<label for="female">Female</label>
+						</div>
+					</form>
+					
+					<div class="age-input">
+						<label for="ageMin">Min Age:</label>
+						<input type="number" id="ageMin" name="ageMin" min="18" max="99" value="18">
+						<label for="ageMax">Max Age:</label>
+						<input type="number" id="ageMax" name="ageMax" min="18" max="99" value="99">
+					</div>
+
+					<div class="submit-button">
+						<button name="submitButton">Submit</button>
 					</div>
 				</form>
-				  
-				<div class="age-input">
-					<label for="ageMin">Min Age:</label>
-					<input type="number" id="ageMin" name="ageMin" min="18" max="99" value="18">
-					<label for="ageMax">Max Age:</label>
-					<input type="number" id="ageMax" name="ageMax" min="18" max="99" value="99">
-				</div>
-
-				<div class="submit-button">
-					<button name="submitButton">Submit</button>
-				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 
+	<div class="match">
+		<h1>You matched with NAME!</h1>
+	</div>
 
 	<script src="swipeHandler.js"></script>
 

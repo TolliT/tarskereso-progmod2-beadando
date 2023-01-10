@@ -1,23 +1,41 @@
+//  CONSTANTS
 const GETUrl = "http://localhost:8080/getuser";
 const POSTUrl = "http://localhost:8080/prefs";
 
 const male_ph = "placeholder.png";
 const female_ph = "placeholder_female.png";
 
+const blurMatch = 10;
+const blurDef = 0;
+
+//  CARDS
 const cards = document.querySelector('.card');
+const main = document.querySelector('.main');
+
+//  MATCHES
+const matchDiv = document.querySelector('.match');
+const matchText = matchDiv.querySelector('h1');
+const defMatchText = "You matched with ";
+
+//  PROFILE
 const image = cards.querySelector("img");
+const infoLine = document.querySelector('.infoLine');
+const bioLine = document.querySelector('.bioLine');
+
+//  BUTTONS
 const likeButton = document.querySelector('.like');
 const dislikeButton = document.querySelector('.dislike');
 
+//  PREFERENCES
 const settings = document.querySelector('.settings');
 const ageMin = settings.querySelector('[name=ageMin]');
 const ageMax = settings.querySelector('[name=ageMax]');
 const submitButton = settings.querySelector('[name=submitButton]');
-
 const form = document.querySelector('form');
 
-const infoLine = document.querySelector('.infoLine');
-const bioLine = document.querySelector('.bioLine');
+let currLike = false;
+let currName = "";
+
 
 
 window.onload = function() {
@@ -58,15 +76,31 @@ submitButton.addEventListener('click', () => {
     postData(POSTUrl, POSTData);
   });
 
+
 likeButton.addEventListener('click', () => {
-  console.log("Like");
+  if(currLike == true){ match(); }
   newCard();
 });
 
 dislikeButton.addEventListener('click', () => {
-  console.log("Dislike");
   newCard();
 });
+
+
+
+function match(){
+  main.style.filter = "blur(10px)";
+  main.style.WebkitFilter = "blur(10px)";
+  matchDiv.style.visibility = "visible";
+  matchText.textContent = defMatchText + currName + "!";
+  setTimeout(matchFade, 3000);
+}
+
+function matchFade(){
+  main.style.filter = "blur(0px)";
+  main.style.WebkitFilter = "blur(0px)";
+  matchDiv.style.visibility = "hidden";
+}
 
 
 
@@ -75,6 +109,9 @@ function newCard() {
   .then(response => {
     infoLine.textContent = response.nev + " (" + response.kor + ")";
     bioLine.textContent = response.leiras;
+    currLike = JSON.parse(response.kedvel);
+    currName = response.nev;
+
     if(response.nem == "ferfi"){
       image.src = male_ph
     }
@@ -86,6 +123,8 @@ function newCard() {
     console.log("ERROR: API call failed!");
   });
 }
+
+
 
 function getData(url) {
   return new Promise((resolve, reject) => {
@@ -103,6 +142,8 @@ function getData(url) {
   });
 }
 
+
+
 function postData(url, data) {
   const xhr = new XMLHttpRequest();
 
@@ -111,10 +152,8 @@ function postData(url, data) {
 
   xhr.onload = function() {
     if (xhr.status >= 200 && xhr.status < 300) {
-      // Success
       console.log(xhr.response);
     } else {
-      // Request failed
       console.error(xhr.statusText);
     }
   };
