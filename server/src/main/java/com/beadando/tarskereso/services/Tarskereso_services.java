@@ -89,6 +89,16 @@ public class Tarskereso_services implements Tarskereso_interface{
 
         return filtered;
     }
+    public ArrayList<User> userFilter(ArrayList<User> users,String genderPref, Integer minAge, Integer maxAge){
+        ArrayList<User> filtered = new ArrayList<>();
+
+        for (User user : users) {
+            if (user.getNem().toString().equals(genderPref) && user.getKor() >= minAge && user.getKor() <= maxAge) {
+                filtered.add(user);
+            }
+        }
+        return filtered;
+    }
 
 
     public void flushDB(String path){
