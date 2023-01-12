@@ -1,22 +1,22 @@
 package com.beadando.tarskereso.services;
 
-
 import com.beadando.tarskereso.model.Nem_enum;
 import com.beadando.tarskereso.model.User;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 public class Tarskereso_services implements Tarskereso_interface{
 
-
-
+    /**
+     * Function handling the logic of writing data to temporary databases in the form of CSV files
+     * @param path String - Path to file location
+     * @param user User - Specified user's data to write
+     */
     public void toFile(String path, User user){
         File file = new File(path);
         try {
@@ -38,6 +38,12 @@ public class Tarskereso_services implements Tarskereso_interface{
         }
 
     }
+
+
+    /**
+     * Function handling the logic of reading data from temporary databases in the form of CSV files
+     * @param path String - Path to file location
+     */
     public ArrayList<User> fromFile(String path){
         ArrayList<User> felhasznalok = new ArrayList<>();
         try {
@@ -47,13 +53,9 @@ public class Tarskereso_services implements Tarskereso_interface{
             while((nextRecord = csvReader.readNext()) != null){
                 User felhasznalo = new User();
                 felhasznalo.setId(Integer.parseInt(nextRecord[0]));
-                switch(nextRecord[1]){
-                    case("ferfi"):
-                        felhasznalo.setNem(Nem_enum.ferfi);
-                        break;
-                    case("no"):
-                        felhasznalo.setNem(Nem_enum.no);
-                        break;
+                switch (nextRecord[1]) {
+                    case ("ferfi") -> felhasznalo.setNem(Nem_enum.ferfi);
+                    case ("no") -> felhasznalo.setNem(Nem_enum.no);
                 }
                 felhasznalo.setNev(nextRecord[2]);
                 felhasznalo.setKor(Integer.parseInt(nextRecord[3]));
@@ -75,8 +77,28 @@ public class Tarskereso_services implements Tarskereso_interface{
         return felhasznalok;
     }
 
+
+    /**
+     * Function handling the logic of filtering the list of users, based on the preferences received from the
+     * frontend website
+     * @param genderPref String - Preferred gender specified by the user
+     * @param minAge Integer - Preferred minimum age by the user
+     * @param maxAge Integer - Preferred maximum age by the user
+     */
     public ArrayList<User> userFilter(String genderPref, Integer minAge, Integer maxAge){
         ArrayList<User> users = fromFile("server/src/main/resources/Tarskereso_db.csv");
+        return getUsers(genderPref, minAge, maxAge, users);
+    }
+
+
+    /**
+     * Function handling the logic of getting the users with specified data, from the database
+     * @param genderPref String - Preferred gender specified by the user
+     * @param minAge Integer - Preferred minimum age by the user
+     * @param maxAge Integer - Preferred maximum age by the user
+     * @param users ArrayList<User> - list of users to be returned
+     */
+    private ArrayList<User> getUsers(String genderPref, Integer minAge, Integer maxAge, ArrayList<User> users) {
         ArrayList<User> filtered = new ArrayList<>();
 
         for (User user : users) {
@@ -84,29 +106,33 @@ public class Tarskereso_services implements Tarskereso_interface{
                 filtered.add(user);
             }
         }
-
-
-
-        return filtered;
-    }
-    public ArrayList<User> userFilter(ArrayList<User> users,String genderPref, Integer minAge, Integer maxAge){
-        ArrayList<User> filtered = new ArrayList<>();
-
-        for (User user : users) {
-            if (user.getNem().toString().equals(genderPref) && user.getKor() >= minAge && user.getKor() <= maxAge) {
-                filtered.add(user);
-            }
-        }
         return filtered;
     }
 
 
+    /**
+     * Function handling the testing of the userFilter() function
+     * @param users ArrayList<User> - list of users to be returned
+     * @param genderPref String - Preferred gender specified by the user
+     * @param minAge Integer - Preferred minimum age by the user
+     * @param maxAge Integer - Preferred maximum age by the use
+     */
+    public ArrayList<User> userFilterTest(ArrayList<User> users, String genderPref, Integer minAge, Integer maxAge){
+        return getUsers(genderPref, minAge, maxAge, users);
+    }
+
+
+    /**
+     * Function handling the deletion of all the contents of the databasae
+     * @param path String - Path to file location
+     */
     public void flushDB(String path){
         File file = new File(path);
         try {
             FileWriter outputfile = new FileWriter(file, false);
             CSVWriter writer = new CSVWriter(outputfile);
             writer.flush();
+            writer.close();
         }
 
         catch(IOException e){

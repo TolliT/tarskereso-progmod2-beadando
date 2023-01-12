@@ -13,11 +13,14 @@ import java.util.Map;
 
 @RestController
 public class UserServiceController {
- Tarskereso_services service = new Tarskereso_services();
+    Tarskereso_services service = new Tarskereso_services();
     String path="server/src/main/resources/filtered.csv";
 
-    public static ArrayList<User> Filtered = new ArrayList<>();
 
+    /**
+     * Function handling the logic of sending user data to the frontend
+     * @return  userData ResponseEntity<>() - User data returned in JSON form
+     */
     @CrossOrigin
     @RequestMapping(value = "/getuser", method = RequestMethod.GET)
     public ResponseEntity<Object> getUser(){
@@ -34,13 +37,16 @@ public class UserServiceController {
     }
 
 
-
+    /**
+     * Function handling the logic of getting user preference data from the frontend
+     * @param  payload ResponseEntity<>() - User preference data received from the frontend in JSON form
+     */
     @CrossOrigin
     @PostMapping("/prefs")
     public ResponseEntity<String> submit(@RequestBody Map<String, Object> payload) {
         String genderPref="";
-        Integer minAge=0;
-        Integer maxAge=0;
+        int minAge=0;
+        int maxAge=0;
 
         for (Map.Entry<String, Object> entry : payload.entrySet()) {
             if(entry.getKey().equals("genderPref")){
@@ -53,21 +59,14 @@ public class UserServiceController {
             else{
                 maxAge=Integer.parseInt((String)entry.getValue());
             }
-
         }
 
-
-
         service.flushDB(path);
-
         ArrayList<User> filtered=service.userFilter(genderPref, minAge, maxAge);
 
         for (User user : filtered) {
             service.toFile(path, user);
         }
-
-
-
 
         return ResponseEntity.ok("success");
     }
